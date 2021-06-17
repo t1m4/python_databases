@@ -15,5 +15,20 @@ services:
     command: python -u postgresql.py
     depends_on:
       - postgres
+  pgadmin:
+    image: dpage/pgadmin4
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 731ruslan00@mail.ru
+      PGADMIN_DEFAULT_PASSWORD: ruslan
+    volumes:
+      - pgadmin:/root/.pgadmin
+    ports:
+      - "9713:80"
+    restart: always
 volumes:
   database-data: # named volumes can be managed easier using docker-compose
+  pgadmin: # named volumes can be managed easier using docker-compose
