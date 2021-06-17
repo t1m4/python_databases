@@ -6,5 +6,12 @@ services:
       - ../.envs/.postgresql # configure postgres
     volumes:
       - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: python postgresql.py
+    depends_on:
+      - postgres
 volumes:
   database-data: # named volumes can be managed easier using docker-compose
