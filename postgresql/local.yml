@@ -3,14 +3,16 @@ services:
   postgres:
     image: "postgres" # use latest official postgres version
     env_file:
-      - ../.envs/.postgresql # configure postgres
+      - .postgresql # configure postgres
+    ports:
+      - "5432:5432"
     volumes:
       - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
   app:
     build:
       context: .
       dockerfile: ./Dockerfile
-    command: python postgresql.py
+    command: python -u postgresql.py
     depends_on:
       - postgres
 volumes:

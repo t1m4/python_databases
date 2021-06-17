@@ -8,6 +8,7 @@ from psycopg2 import Error
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
+
 def connect(user, password, host, port, database):
     try:
         # Подключение к существующей базе данных
@@ -38,7 +39,7 @@ def connect(user, password, host, port, database):
         cursor.execute("SELECT version();")
         # Получить результат
         record = cursor.fetchone()
-        print("Вы подключены к - ", record, "\n")
+        print("Вы подключены к - hello ruslanslkdfj hello recodedf", record, "\n")
 
     except Exception as error:
         print(error)
@@ -48,9 +49,12 @@ def connect(user, password, host, port, database):
             cursor.close()
             connection.close()
             print("Соединение с PostgreSQL закрыто")
-
+    while True:
+        print('I am sleeping', user)
+        time.sleep(10)
+        pass
 if __name__ == '__main__':
-    env_path = Path(__file__).resolve(strict=True).parent.parent / ".envs" / '.postgresql'
+    env_path = Path(__file__).resolve(strict=True).parent / '.postgresql'
     load_dotenv(dotenv_path=env_path)
     POSTGRES_HOST = environ.get('POSTGRES_HOST')
     POSTGRES_PORT = environ.get('POSTGRES_PORT')
